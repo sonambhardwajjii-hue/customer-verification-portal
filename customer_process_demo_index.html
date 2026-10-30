@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customer Process Portal</title>
+<style>
+*{box-sizing:border-box}body{margin:0;padding:20px;background:#f2f5fa;font-family:Arial,sans-serif;color:#172033}
+.card{max-width:480px;margin:35px auto;background:#fff;padding:24px;border-radius:16px;box-shadow:0 8px 28px #15213a18}
+h1{font-size:24px;color:#174477;margin-top:0}.step{margin:18px 0;padding:15px;border:1px solid #dce3ed;border-radius:10px}
+button{width:100%;padding:14px;border:0;border-radius:9px;background:#174477;color:#fff;font-size:16px;margin-top:12px}
+input,select{width:100%;padding:12px;margin-top:10px;border:1px solid #cbd5e1;border-radius:8px}
+#status{margin-top:20px;padding:16px;border-radius:10px;background:#eef5ff;text-align:center;font-weight:bold}
+.small{font-size:12px;color:#667085;line-height:1.5}.hidden{display:none}
+</style>
+</head>
+<body>
+<main class="card">
+<h1>Customer Process Portal</h1>
+<p class="small">यह केवल प्रक्रिया का नमूना है। इस पेज पर कोई वास्तविक दस्तावेज़ या फोटो अपलोड नहीं होता और कोई पहचान सत्यापन नहीं किया जाता।</p>
+<section id="step1" class="step">
+<h3>Step 1: Document Demo</h3>
+<label for="doc">नमूना दस्तावेज़ का प्रकार चुनें</label>
+<select id="doc"><option value="">चुनें</option><option>Sample ID Document</option><option>Sample Address Document</option></select>
+<button id="next1">Next</button>
+</section>
+<section id="step2" class="step hidden">
+<h3>Step 2: Photo Demo</h3>
+<p>यहाँ लाइव फोटो लेने के बजाय केवल नमूना प्रक्रिया दिखाई जाती है।</p>
+<label><input type="checkbox" id="photo" style="width:auto"> नमूना फोटो चरण पूरा करें</label>
+<button id="finish">Submit</button>
+</section>
+<div id="status" class="hidden" role="status" aria-live="polite"></div>
+</main>
+<script>
+const step1=document.getElementById('step1'),step2=document.getElementById('step2'),statusBox=document.getElementById('status');
+document.getElementById('next1').addEventListener('click',()=>{
+ if(!document.getElementById('doc').value){alert('कृपया नमूना दस्तावेज़ का प्रकार चुनें।');return;}
+ step1.classList.add('hidden');step2.classList.remove('hidden');
+});
+document.getElementById('finish').addEventListener('click',()=>{
+ if(!document.getElementById('photo').checked){alert('कृपया नमूना फोटो चरण पूरा करें।');return;}
+ step2.classList.add('hidden');statusBox.classList.remove('hidden');statusBox.textContent='Verification Pending…';
+ setTimeout(()=>{statusBox.textContent='Process Completed';},5000);
+});
+</script>
+</body>
+</html>
